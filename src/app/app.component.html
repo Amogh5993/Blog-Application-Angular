@@ -3,9 +3,12 @@
   <div class="container">
     <div class="row-header">
       <div class="col-md-12">
-        <a style="color:white;">edwisor Blog Application</a>
+        <a style="color:white;">Edwisor Blog Application</a>
       </div>
     </div>
+
+  
+    
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!--Brand and toggle get grouped for better mobile display-->
@@ -25,9 +28,9 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
 
-            <li> <a>Home</a></li>
-            <li><a>About</a></li>
-            <li><a>Post a Blog</a></li>
+            <li><a [routerLink]= "['/home']" > Home</a></li>
+            <li><a [routerLink]= "['/about']" >About</a></li>
+            <li><a [routerLink]= "['/create']" >Post a Blog</a></li>
           </ul>
 
 
@@ -37,4 +40,8 @@
 
 
   </div>
+
+  <br/>
+
+  <router-outlet> </router-outlet>
   
