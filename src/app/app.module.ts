@@ -11,6 +11,7 @@ import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
+import { BlogService } from './blog.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { AboutComponent } from './about/about.component';
       {path: 'home', component: HomeComponent},
       {path: ' ', redirectTo: 'home', pathMatch: 'full'},
       {path: 'about', component: AboutComponent},
-      {path: 'blog/:blogID', component: BlogViewComponent},
+      {path: 'blog/:blogId', component: BlogViewComponent},
       {path: 'create', component: BlogCreateComponent},
       {path: 'edit/:blogID', component: BlogEditComponent},
       {path: '**', component: NotFoundComponent},
@@ -37,7 +38,7 @@ import { AboutComponent } from './about/about.component';
   ])
 
   ],
-  providers: [],
+  providers: [BlogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

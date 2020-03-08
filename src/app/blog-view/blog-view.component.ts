@@ -1,64 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 // importing route related code
 import { ActivatedRoute, Router } from '@angular/router';
+import { BlogService } from '../blog.service';
 
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
   styleUrls: ['./blog-view.component.css']
 })
-export class BlogViewComponent implements OnInit {
+export class BlogViewComponent implements OnInit, OnDestroy {
 
-  // empty object
+
+
   public currentBlog: any;
 
-  // declare a dummy blog variable here
-  public allBlogs = [
-    {
-      blogId: '1',
-      lastModified: '2017-10-20T12:20:47.854Z',
-      created: ' 2017-10-20T12:20:47.854Z',
-      tags: [],
-      author: 'Admin',
-      category: 'Comedy',
-      isPublished: 'true',
-      views: 0,
-      bodyHtml: 'this is blog 1 body',
-      description: 'this is blog 1 description',
-      title: 'This is blog 1'
-    },
-    {
-
-      blogId: '2',
-      lastModified: '2017-10-21T12:20:47.678Z',
-      created: ' 2017-10-21T12:20:47.678Z',
-      tags: [],
-      author: 'Admin',
-      category: 'Comedy',
-      isPublished: 'true',
-      views: 0,
-      bodyHtml: '<h1>this is blog 2 body</h1> <p>small text</p>',
-      description: 'this is blog 2 description',
-      title: 'This is blog 2'
-    },
-    {
-      blogId: '3',
-      lastModified: '2017-10-22T12:20:47.758Z',
-      created: ' 2017-10-21T12:20:47.758Z',
-      tags: [],
-      author: 'Admin',
-      category: 'Comedy',
-      isPublished: 'true',
-      views: 0,
-      bodyHtml: '<h1>this is blog 3 body</h1> <p>small text</p>',
-      description: 'this is blog 3 description',
-      title: 'This is blog 3'
-
-    }
-  ];
-
-  constructor(private route: ActivatedRoute, private router: Router) {
-    console.log('constructor is called');
+    constructor(private route: ActivatedRoute, private router: Router, public blogService: BlogService) {
+    console.log('blog-view constructor is called');
 
   }
   ngOnInit() {
@@ -68,19 +25,13 @@ export class BlogViewComponent implements OnInit {
     console.log(myBlogId);
 
     // calling the function to get the blog with this blogId out of the overall array
-    this.getSingleBlogInformation(myBlogId);
-  }
-  public getSingleBlogInformation(currentBlogId): any {
-    // using a for loop here from type Script
-    // https://www.typescriptlang.org/docs/handbook/iterators-and-generators.html
-
-    for (const blog of this.allBlogs) {
-      if (blog.blogId === currentBlogId) {
-        this.currentBlog = blog;
-      }
-    }
-
+    this.currentBlog = this.blogService.getSingleBlogInformation(myBlogId);
     console.log(this.currentBlog);
+  }
+
+
+  ngOnDestroy() {
+    console.log('ngOnDestroyCalled');
   }
 
 }
