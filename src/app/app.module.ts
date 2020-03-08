@@ -12,6 +12,7 @@ import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
 import { BlogService } from './blog.service';
+import { BlogHttpService } from './blog-http.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import { BlogService } from './blog.service';
   ])
 
   ],
-  providers: [BlogService],
+  providers: [BlogService, BlogHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
