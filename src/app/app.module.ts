@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+
 // router module used for setting up application level route
 import {RouterModule, Routes} from '@angular/router';
 
@@ -28,6 +30,7 @@ import {HttpClientModule} from '@angular/common/http' ;
   imports: [
     BrowserModule,
     HttpClientModule,
+    FormsModule,
      // routerModule forRoot method to declare the possible routes in application
      RouterModule.forRoot([
       {path: 'home', component: HomeComponent},
