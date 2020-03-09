@@ -14,6 +14,7 @@ import { AboutComponent } from './about/about.component';
 import { BlogService } from './blog.service';
 import { BlogHttpService } from './blog-http.service';
 
+import {HttpClientModule} from '@angular/common/http' ;
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +27,7 @@ import { BlogHttpService } from './blog-http.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
      // routerModule forRoot method to declare the possible routes in application
      RouterModule.forRoot([
       {path: 'home', component: HomeComponent},

@@ -23,10 +23,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     // this.allBlogs = this.blogHttpService.getAllBlogs();
 
     this.allBlogs = this.blogHttpService.getAllBlogs().subscribe(
-      (data: { data: any; }) => {
+      (      data: { [x: string]: any[]; }) => {
         console.log('logging data');
         console.log(data);
-        this.allBlogs = data.data;
+        this.allBlogs = data[' data '];
       },
       (error: { errorMessage: any; }) => {
         console.log('Some error occured');
