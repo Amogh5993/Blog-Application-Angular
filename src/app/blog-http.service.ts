@@ -14,7 +14,7 @@ import 'rxjs/add/operator/do';
 export class BlogHttpService {
 
 
-  public allBlogs: any;
+  public allBlogs = [];
   public currentBlog: any;
   public baseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
 
