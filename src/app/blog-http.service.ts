@@ -17,26 +17,40 @@ export class BlogHttpService {
   public allBlogs = [];
   public currentBlog: any;
   public baseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
+  // tslint:disable-next-line:max-line-length
+  private authToken = 'ZTE5YmIzYmUzODBkNGZhODVmYTI2YTIyMjM4YzBhODFlZDA3ODZiMjY4MDJmYzE0YTJiM2UxODkzMDFiZDQ2OTQ2NzA3NGMyMDViY2I3OGRiNzNlODFkMmMwNjY4MTE3MjYwY2FhZTU2N2MxNzA3YTY1YTliNjdhYzRmZDQ4YjZjYQ==';
 
 
 
-  // tslint:disable-next-line: variable-name
+// tslint:disable-next-line: variable-name
   constructor(private _http: HttpClient) {
 
     console.log('Blog-Http-Service is called');
 
   }
 
+  // Exception Handler
+private handleError(err: HttpErrorResponse) {
+  console.log('Handle error http calls');
+  console.log(err.message);
+  // tslint:disable-next-line: deprecation
+  return Observable.throw(err.message);
+}
+
   // method to return all the blogs
   public getAllBlogs(): any {
     // tslint:disable-next-line:max-line-length
-    const myResponse = this._http.get(this.baseUrl + '/all?authToken=ZTE5YmIzYmUzODBkNGZhODVmYTI2YTIyMjM4YzBhODFlZDA3ODZiMjY4MDJmYzE0YTJiM2UxODkzMDFiZDQ2OTQ2NzA3NGMyMDViY2I3OGRiNzNlODFkMmMwNjY4MTE3MjYwY2FhZTU2N2MxNzA3YTY1YTliNjdhYzRmZDQ4YjZjYQ==');
+    const myResponse = this._http.get(this.baseUrl + '/all?authToken=' + this.authToken);
     console.log(myResponse);
     return myResponse;
   }
 
   // method to get a particular blog
   public getSingleBlogInformation(currentBlogId: string): any {
+
+    const myResponse = this._http.get(this.baseUrl + '/view' + '/' + currentBlogId + '?authToken=' + this.authToken) ;
+    console.log(myResponse);
+    return myResponse;
 
   }
 }

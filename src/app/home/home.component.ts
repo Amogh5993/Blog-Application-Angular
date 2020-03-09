@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BlogService } from '../blog.service';
 import { BlogHttpService } from '../blog-http.service';
+import { Observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -37,6 +39,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
     console.log('this.allBlogs');
   }
+
+  // Exception Handler
+private handleError(err: HttpErrorResponse) {
+  console.log('Handle error http calls');
+  console.log(err.message);
+  // tslint:disable-next-line: deprecation
+  return Observable.throw(err.message);
+}
 
   ngOnDestroy(): void {
     console.log('Home Component OnDestroy called');

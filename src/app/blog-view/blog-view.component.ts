@@ -3,6 +3,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 
+import { BlogHttpService } from '../blog-http.service';
+import { Observable } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
+
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
@@ -14,7 +18,8 @@ export class BlogViewComponent implements OnInit, OnDestroy {
 
   public currentBlog: any;
 
-    constructor(private route: ActivatedRoute, private router: Router, public blogService: BlogService) {
+  // tslint:disable-next-line:max-line-length
+  constructor(private route: ActivatedRoute, private router: Router, public blogService: BlogService, public blogHttpService: BlogHttpService) {
     console.log('blog-view constructor is called');
 
   }
@@ -24,12 +29,29 @@ export class BlogViewComponent implements OnInit, OnDestroy {
     const myBlogId = this.route.snapshot.paramMap.get('blogId');
     console.log(myBlogId);
 
-    // calling the function to get the blog with this blogId out of the overall array
-    this.currentBlog = this.blogService.getSingleBlogInformation(myBlogId);
-    console.log(this.currentBlog);
+
+    this.blogHttpService.getSingleBlogInformation(myBlogId).subscribe(
+      data => {
+        console.log(data);
+        // tslint:disable-next-line:no-string-literal
+        this.currentBlog = data['data'];
+      },
+      error => {
+        console.log('some error occured');
+        console.log(error.errorMessage);
+      }
+
+
+    );
   }
 
-
+// Exception Handler
+private handleError(err: HttpErrorResponse) {
+  console.log('Handle error http calls');
+  console.log(err.message);
+  // tslint:disable-next-line: deprecation
+  return Observable.throw(err.message);
+}
   ngOnDestroy() {
     console.log('ngOnDestroyCalled');
   }
