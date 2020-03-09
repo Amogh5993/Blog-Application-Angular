@@ -26,7 +26,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       (      data: { [x: string]: any[]; }) => {
         console.log('logging data');
         console.log(data);
-        this.allBlogs = data[' data '];
+        // tslint:disable-next-line:no-string-literal
+        this.allBlogs = data['data'];
       },
       (error: { errorMessage: any; }) => {
         console.log('Some error occured');
