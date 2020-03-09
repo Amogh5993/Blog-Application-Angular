@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogHttpService } from '../blog-http.service';
 
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-blog-create',
   templateUrl: './blog-create.component.html',
@@ -8,7 +10,7 @@ import { BlogHttpService } from '../blog-http.service';
 })
 export class BlogCreateComponent implements OnInit {
 
-  constructor(private blogHttpService: BlogHttpService) { }
+  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router) { }
 
   public blogTitle: string;
   public blogBodyHtml: string;
@@ -34,6 +36,9 @@ export class BlogCreateComponent implements OnInit {
         console.log('Blog Created');
         console.log(data);
         alert('Blog Posted Successfully');
+        setTimeout(() => {
+          this.router.navigate(['/blog',data.data.blogId]);
+        }, 1000)
       },
       error => {
         console.log('some error occured');
