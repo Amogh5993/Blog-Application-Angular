@@ -14,8 +14,8 @@ import 'rxjs/add/operator/do';
 export class BlogHttpService {
 
 
-  public allBlogs;
-  public currentBlog;
+  public allBlogs: any;
+  public currentBlog: any;
   public baseUrl = 'https://blogapp.edwisor.com/api/v1/blogs';
 
 
@@ -29,7 +29,8 @@ export class BlogHttpService {
 
   // method to return all the blogs
   public getAllBlogs(): any {
-    const myResponse = this._http.get(this.baseUrl + '/all');
+    // tslint:disable-next-line:max-line-length
+    const myResponse = this._http.get(this.baseUrl + '/all?authToken=ZTE5YmIzYmUzODBkNGZhODVmYTI2YTIyMjM4YzBhODFlZDA3ODZiMjY4MDJmYzE0YTJiM2UxODkzMDFiZDQ2OTQ2NzA3NGMyMDViY2I3OGRiNzNlODFkMmMwNjY4MTE3MjYwY2FhZTU2N2MxNzA3YTY1YTliNjdhYzRmZDQ4YjZjYQ==');
     console.log(myResponse);
     return myResponse;
   }
