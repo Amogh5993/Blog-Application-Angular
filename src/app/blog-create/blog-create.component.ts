@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { BlogHttpService } from '../blog-http.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BlogCreateComponent implements OnInit {
 
-  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router) {}
 
   public blogTitle: string;
   public blogBodyHtml: string;
@@ -37,8 +38,8 @@ export class BlogCreateComponent implements OnInit {
         console.log(data);
         alert('Blog Posted Successfully');
         setTimeout(() => {
-          this.router.navigate(['/blog',data.data.blogId]);
-        }, 1000)
+          this.router.navigate(['/blog', data.data.blogId]);
+        }, 1000);
       },
       error => {
         console.log('some error occured');
