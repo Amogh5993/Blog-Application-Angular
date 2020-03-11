@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BlogHttpService } from '../blog-http.service';
 
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-blog-create',
@@ -11,7 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class BlogCreateComponent implements OnInit {
 
   // tslint:disable-next-line:max-line-length
-  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router) {}
+  constructor(private blogHttpService: BlogHttpService, private _route: ActivatedRoute, private router: Router, private toastr: ToastrService) {}
 
   public blogTitle: string;
   public blogBodyHtml: string;
@@ -36,7 +37,7 @@ export class BlogCreateComponent implements OnInit {
       data => {
         console.log('Blog Created');
         console.log(data);
-        alert('Blog Posted Successfully');
+        this.toastr.success('Hello, I\'m the toastr message.');
         setTimeout(() => {
           this.router.navigate(['/blog', data.data.blogId]);
         }, 1000);
@@ -44,7 +45,7 @@ export class BlogCreateComponent implements OnInit {
       error => {
         console.log('some error occured');
         console.log(error.errorMessage);
-        alert('Some error occured');
+        alert('Error');
       }
     );
   } // end blog create method

@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
 // router module used for setting up application level route
-import {RouterModule, Routes} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -16,7 +19,7 @@ import { AboutComponent } from './about/about.component';
 import { BlogService } from './blog.service';
 import { BlogHttpService } from './blog-http.service';
 
-import {HttpClientModule} from '@angular/common/http' ;
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,17 +34,19 @@ import {HttpClientModule} from '@angular/common/http' ;
     BrowserModule,
     HttpClientModule,
     FormsModule,
-     // routerModule forRoot method to declare the possible routes in application
-     RouterModule.forRoot([
-      {path: 'home', component: HomeComponent},
-      {path: ' ', redirectTo: 'home', pathMatch: 'full'},
-      {path: 'about', component: AboutComponent},
-      {path: 'blog/:blogId', component: BlogViewComponent},
-      {path: 'create', component: BlogCreateComponent},
-      {path: 'edit/:blogID', component: BlogEditComponent},
-      {path: '**', component: NotFoundComponent},
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    // routerModule forRoot method to declare the possible routes in application
+    RouterModule.forRoot([
+      { path: 'home', component: HomeComponent },
+      { path: ' ', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'about', component: AboutComponent },
+      { path: 'blog/:blogId', component: BlogViewComponent },
+      { path: 'create', component: BlogCreateComponent },
+      { path: 'edit/:blogID', component: BlogEditComponent },
+      { path: '**', component: NotFoundComponent },
 
-  ])
+    ])
 
   ],
   providers: [BlogService, BlogHttpService],
