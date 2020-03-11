@@ -7,10 +7,17 @@ import { BlogHttpService } from '../blog-http.service';
 import { Observable } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 
+import { ToastrService } from 'ngx-toastr';
+
+import { Location } from '@angular/common';
+
+
+
 @Component({
   selector: 'app-blog-view',
   templateUrl: './blog-view.component.html',
-  styleUrls: ['./blog-view.component.css']
+  styleUrls: ['./blog-view.component.css'],
+  providers: [Location]
 })
 export class BlogViewComponent implements OnInit, OnDestroy {
 
@@ -19,7 +26,7 @@ export class BlogViewComponent implements OnInit, OnDestroy {
   public currentBlog: any;
 
   // tslint:disable-next-line:max-line-length
-  constructor(private route: ActivatedRoute, private router: Router, public blogService: BlogService, public blogHttpService: BlogHttpService) {
+  constructor(private route: ActivatedRoute, private router: Router, public blogService: BlogService, public blogHttpService: BlogHttpService, private toastr: ToastrService, private location: Location) {
     console.log('blog-view constructor is called');
 
   }
@@ -45,6 +52,11 @@ export class BlogViewComponent implements OnInit, OnDestroy {
     );
   }
 
+  ngOnDestroy() {
+    console.log('ngOnDestroyCalled');
+  }
+
+
 // Exception Handler
 private handleError(err: HttpErrorResponse) {
   console.log('Handle error http calls');
@@ -52,8 +64,33 @@ private handleError(err: HttpErrorResponse) {
   // tslint:disable-next-line: deprecation
   return Observable.throw(err.message);
 }
-  ngOnDestroy() {
-    console.log('ngOnDestroyCalled');
+
+
+public deleteThisBlog(): any {
+this.blogHttpService.deleteBlog(this.currentBlog.blogId).subscribe(
+
+  data => {
+    console.log(data);
+    this.toastr.success('Blog Deleted Successfully', 'Success!');
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 1000);
+  },
+  error => {
+    console.log('some error occured');
+    console.log(error.errorMessage);
+    this.toastr.error('some error occured', 'Error!');
   }
+
+
+
+
+);
+}
+public goBackToPreviousPage(): any {
+this.location.back();
+}
+
+
 
 }
